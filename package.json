@@ -1,0 +1,19 @@
+{
+  "name": "vscode-devcontainer-tutorial",
+  "version": "1.0.0",
+  "description": "Tutorial for Setting up Devcontainer in Visual Studio Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0916dhkim/vscode-devcontainer-tutorial.git"
+  },
+  "author": "Donghyeon Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0916dhkim/vscode-devcontainer-tutorial/issues"
+  },
+  "homepage": "https://github.com/0916dhkim/vscode-devcontainer-tutorial#readme"
+}
