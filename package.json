@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/0916dhkim/vscode-devcontainer-tutorial/issues"
   },
-  "homepage": "https://github.com/0916dhkim/vscode-devcontainer-tutorial#readme"
+  "homepage": "https://github.com/0916dhkim/vscode-devcontainer-tutorial#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
