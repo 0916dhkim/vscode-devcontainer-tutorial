@@ -12,7 +12,7 @@ services:
             dockerfile: .devcontainer/Dockerfile
         environment: *default-environment
         volumes:
-            - ..:/workspace:cached
+            - ..:/workspace
         user: vscode
         command: sleep infinity
     db:
@@ -21,3 +21,7 @@ services:
         environment: *default-environment
         ports:
             - 5432:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+volumes:
+    pgdata:
