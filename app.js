@@ -40,6 +40,18 @@ app.post("/todo", async (req, res) => {
         });
 });
 
+app.post("/todo/finished", async (req, res) => {
+    const { id, finished } = req.body;
+    db.none("UPDATE todo SET finished = $1 WHERE id = $2", [finished, id])
+        .then(() => res.send({ status: "OK" }))
+        .catch(e => {
+            res.status(500);
+            res.send({
+                error: `Database error: ${e}`
+            });
+        });
+});
+
 app.delete("/todo", async (req, res) => {
     const { id } = req.body;
     db.none("DELETE FROM todo WHERE id = $1", [id])
