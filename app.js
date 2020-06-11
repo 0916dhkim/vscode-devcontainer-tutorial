@@ -10,6 +10,9 @@ const connection = {
 };
 const db = pgp(connection);
 
+// Middlewares.
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
@@ -23,6 +26,12 @@ app.get("/todo", async (req, res, next) => {
                 error: "Database error."
             });
         });
+});
+
+// Error handlers.
+app.use((req, res, next) => {
+    res.status(404);
+    res.send("Not Found");
 });
 
 app.listen(PORT, () => {
