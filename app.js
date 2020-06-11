@@ -20,10 +20,22 @@ app.get("/", (req, res) => {
 app.get("/todo", async (req, res, next) => {
     db.any("SELECT * FROM todo")
         .then(data => res.send(data))
-        .catch(() => {
+        .catch(e => {
             res.status(500);
             res.send({
-                error: "Database error."
+                error: `Database error: ${e}`
+            });
+        });
+});
+
+app.post("/todo", async (req, res) => {
+    const { task } = req.body;
+    db.one("INSERT INTO todo(task, finished) VALUES($1, $2) RETURNING id", [task, false])
+        .then(data => res.send(data))
+        .catch(e => {
+            res.status(500);
+            res.send({
+                error: `Database error: ${e}`
             });
         });
 });
