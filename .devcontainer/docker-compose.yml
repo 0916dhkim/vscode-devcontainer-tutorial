@@ -2,15 +2,19 @@ version: '3.7'
 
 x-environment:
     &default-environment
-    - POSTGRES_USER=vscode
-    - POSTGRES_PASSWORD=notsecure
-    - POSTGRES_DB=tutorial
+    POSTGRES_USER: vscode
+    POSTGRES_PASSWORD: notsecure
+    POSTGRES_DB: tutorial
 services:
     app:
         build:
             context: ..
             dockerfile: .devcontainer/Dockerfile
-        environment: *default-environment
+        environment:
+            <<: *default-environment
+            PORT: 3000
+        ports:
+            - 3000:3000
         volumes:
             - ..:/workspace
         user: vscode
