@@ -211,7 +211,7 @@ YAML provides a feature called **anchor**. It allows you to write
 repeating part of a YAML file once as an **anchor**,
 then reference the anchor throughout the rest of the file as **aliases**.
 
-In our `docker-compose.yml` file, we can see top-level key `x-environment`.
+Our `docker-compose.yml` file begins with a top-level key `x-environment`.
 The ampersand means it is an anchor.
 
 ```yaml
@@ -445,6 +445,7 @@ This repository provides a really simple TODO API server
 in `app.js` file. Start the server and try it yourself!
 
 ```bash
+npm ci
 node app.js
 ```
 
