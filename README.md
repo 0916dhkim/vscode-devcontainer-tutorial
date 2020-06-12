@@ -178,7 +178,10 @@ That's the end of `Dockerfile`.
 
 ## docker-compose.yml
 Now let's look at `docker-compose.yml` file.
+
 YAML is a popular file format for config files.
+It allows organizing complicated settings into
+concise key-value pairs.
 If you want to learn more about YAML,
 check out their official website.
 
@@ -336,8 +339,7 @@ environment: *default-environment
 ```
 
 Here we can find an yaml alias again. This time,
-we are taking `default-environment` as a whole
-without overriding any value.
+we are taking `default-environment` as-is, without overriding any value.
 
 ```yaml
 ports:
@@ -441,7 +443,7 @@ the dev container.
 workspace inside a dev container alongside with a
 postgres service.
 
-This repository provides a really simple TODO API server
+This repository provides a super simple TODO API server
 in `app.js` file. Start the server and try it yourself!
 
 ```bash
