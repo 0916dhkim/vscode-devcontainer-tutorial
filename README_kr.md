@@ -426,7 +426,7 @@ volumes:
 ![Remote Menu](screenshots/remote_menu.PNG)
 
 위의 스크린샷과 같이 VS Code 메뉴가 열립니다.
-**"Remote-Containers: Reopen in Container"**를 선택하세요.
+**"Remote-Containers: Reopen in Container"** 를 선택하세요.
 
 ![Loading](screenshots/loading.PNG)
 
