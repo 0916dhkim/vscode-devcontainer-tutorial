@@ -8,7 +8,7 @@
 개발에 필요한 툴들을 버전에 맞게 설치하고 일일히 업데이트 하는 것은
 힘들고 귀찮은 일입니다.
 **도커**와 **비주얼 스튜디오 코드**를 함께 사용함으로서
-소프트웨어 개발 정정을 크게 개선할 수 있습니다.
+소프트웨어 개발 경험을 크게 개선할 수 있습니다.
 
 이 튜토리얼에서는 `express.js` 서버와 `PostgreSQL` 데이터베이스를
 포함한 개발 환경을 구축하는 것을 목표로 합니다.
@@ -16,8 +16,7 @@
 
 [도커 허브](https://hub.docker.com/)에서 찾을 수 있는
 이미지 목록입니다.
-어떻게 조합해서 훌륭한 프로젝트로 만들어 낼지는
-창의력에 달렸습니다.
+필요에 따라 창의적으로 조합해서 사용하세요.
 
 - 웹 서버
     - [아파치](https://hub.docker.com/_/httpd)
@@ -159,7 +158,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 **NOTE**: 만약 `sudo` 커맨드를 사용하고 싶다면,
 추가적인 설정이 필요합니다.
-이 튜토리얼에서는 어떻게 설정하는지 다루지 않습니다.
+이 튜토리얼에서는 `sudo`를 어떻게 설정하는지 다루지 않습니다.
 
 `DEBIAN_FRONTEND` 환경변수를 다시 `dialog`로
 되돌려서 도커 컨테이너를 사용할 때는
@@ -175,8 +174,6 @@ ENV DEBIAN_FRONTEND=dialog
 USER $USERNAME
 ```
 
-이상 `Dockerfile`에 대한 설명이었습니다.
-
 ---
 
 ## docker-compose.yml
@@ -184,6 +181,7 @@ USER $USERNAME
 이제 `docker-compose.yml` 파일을 살펴봅시다.
 
 YAML은 설정 파일에 자주 쓰이는 파일 포맷입니다.
+키-값 구조로 설정을 저장할 수 있기 때문에 복잡한 설정 파일을 작성하기 편리합니다.
 YAML에 대해서 더 알고 싶다면 공식 웹사이트를 확인하세요.
 
 <https://yaml.org/>
@@ -262,17 +260,17 @@ environment:
 "`default-environment`의 모든 값을 `environment`로 불러오시오"
 라는 뜻입니다. 또한, alias 이후에 `PORT` 키가 설정된 것을 볼 수 있습니다.
 `PORT` 변수는 나중에 express 서버가 어떤 포트를 listen 해야하는지
-정합니다.
+설정합니다.
 
 ```yaml
 ports:
     - 3000:3000
 ```
 
-`ports` key here defines this port-forwarding behavior.
 `PORT` 환경변수 때문에 express 서버는 3000번 포트를 listen 할 것입니다.
 호스트의 포트를 컨테이너의 포트에 포워드 해주어야
 이 express 서버에 접근할 수 있습니다.
+이러한 포트 포워딩을 `ports` 키로 설정할 수 있습니다.
 
 자, 이제 개발을 신나게 해주는 설정을 살펴봅시다!
 
@@ -339,8 +337,7 @@ environment: *default-environment
 ```
 
 YAML alias가 다시 나왔습니다.
-이번에는 덮어쓰는 값 없이 `default-environment`를
-통채로 불러옵니다.
+이번에는 덮어쓰는 값 없이 `default-environment`를 그대로 불러옵니다.
 
 ```yaml
 ports:
@@ -356,11 +353,14 @@ volumes:
     - ../postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 ```
 
-`db` 서비스 컨테에너에는 볼륨 두개를 마운트 합니다. 첫번째 볼륨 `pgdata`는
+`db` 서비스 컨테에너에는 볼륨을 두 개 마운트 합니다.
+
+첫번째 볼륨 `pgdata`는
 데이터베이스 파일들을 저장하는 용도입니다.
 `pgdata`가 상대경로가 아니라는 점에 주목해주세요.
 `pgdata`는 **도커 볼륨**입니다. **도커 볼륨**은 도커에 의해 관리되는
 특별한 저장공간이며, 컨테이너들에 마운트 할 수 있습니다.
+
 두번째 볼륨 `../postgresql/docker-entrypoint-initdb.d/`는
 초기화 스크립트를 저장하는 디렉토리입니다.
 데이터베이스 파일이 존재하지 않는다면, `postgres` 컨테이너는
@@ -374,9 +374,6 @@ volumes:
     pgdata:
 ```
 
-Top level `volumes` key is for defining reusable volumes.
-The empty key `pgdata` here creates a docker volume
-with default driver.
 최상위 키 `volumes`는 재사용 가능한 볼륨을 설정할 때 씁니다.
 여기에 보이는 빈 키 `pgdata`는 기본 드라이버를 사용한
 도커 볼륨을 생성합니다.
@@ -443,9 +440,6 @@ VS Code가 데브 컨테이너 안에서 workspace를 열어줍니다.
 
 **축하합니다!** 성공적으로 VS Code의 workspace를
 데브 컨테이너 안에서 열었고, postgres 서버도 작동합니다.
-
-This repository provides a really simple TODO API server
-in `app.js` file. Start the server and try it yourself!
 
 이 코드 저장소의 `app.js` 파일에 초간단한 TODO API 서버 구현물이 있습니다.
 서버를 실행하고 직접 테스트해 보세요!
